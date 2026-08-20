@@ -1,22 +1,66 @@
 {
   "info": {
     "_postman_id": "5f2a9b1c-7e3d-4b6a-9c2e-1a8d4f6b0c3e",
-    "name": "dummy-bca-llm",
-    "description": "Static-response simulator mirroring the BCA OpenAPI OAuth & Signature and LLM Gateway Multimodal API contracts. No real LLM is called.\n\nRun \"Get Access Token\" first (it stores the token in a collection variable), then run anything under \"Core Resources\". Signatures are generated automatically:\n- RSA (asymmetric) via the /dev/sign/oauth helper route (Postman's sandbox has no RSA-signing primitive)\n- HMAC-SHA512 (symmetric) natively in the pre-request script via CryptoJS\n\nSet the `baseUrl` collection variable to point at localhost or a deployed instance (e.g. Vercel).",
+    "name": "dummy-abc-llm",
+    "description": "Static-response simulator mirroring the ABC OpenAPI OAuth & Signature and LLM Gateway Multimodal API contracts. No real LLM is called.\n\nRun \"Get Access Token\" first (it stores the token in a collection variable), then run anything under \"Core Resources\". Signatures are generated automatically:\n- RSA (asymmetric) via the /dev/sign/oauth helper route (Postman's sandbox has no RSA-signing primitive)\n- HMAC-SHA512 (symmetric) natively in the pre-request script via CryptoJS\n\nSet the `baseUrl` collection variable to point at localhost or a deployed instance (e.g. Vercel).",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
   "variable": [
-    { "key": "baseUrl", "value": "http://localhost:3000", "type": "string" },
-    { "key": "clientId", "value": "b66925de-d8ec-476e-a170-6cf06c863b78", "type": "string" },
-    { "key": "clientSecret", "value": "efc71ced-b0e7-4b47-8270-3c24829764aa", "type": "string" },
-    { "key": "channelId", "value": "95424", "type": "string" },
-    { "key": "partnerId", "value": "DIGITAL230844211", "type": "string" },
-    { "key": "accessToken", "value": "", "type": "string" },
-    { "key": "oauthTimestamp", "value": "", "type": "string" },
-    { "key": "oauthSignature", "value": "", "type": "string" },
-    { "key": "llmTimestamp", "value": "", "type": "string" },
-    { "key": "llmSignature", "value": "", "type": "string" },
-    { "key": "externalId", "value": "", "type": "string" }
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3000",
+      "type": "string"
+    },
+    {
+      "key": "clientId",
+      "value": "b66925de-d8ec-476e-a170-6cf06c863b78",
+      "type": "string"
+    },
+    {
+      "key": "clientSecret",
+      "value": "efc71ced-b0e7-4b47-8270-3c24829764aa",
+      "type": "string"
+    },
+    {
+      "key": "channelId",
+      "value": "95424",
+      "type": "string"
+    },
+    {
+      "key": "partnerId",
+      "value": "DIGITAL230844211",
+      "type": "string"
+    },
+    {
+      "key": "accessToken",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "oauthTimestamp",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "oauthSignature",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "llmTimestamp",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "llmSignature",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "externalId",
+      "value": "",
+      "type": "string"
+    }
   ],
   "item": [
     {
@@ -37,7 +81,7 @@
                   "",
                   "pm.sendRequest({ url: helperUrl, method: 'GET' }, function (err, res) {",
                   "    if (err) {",
-                  "        console.error('dummy-bca-llm: failed to reach /dev/sign/oauth', err);",
+                  "        console.error('dummy-abc-llm: failed to reach /dev/sign/oauth', err);",
                   "        return;",
                   "    }",
                   "    const body = res.json();",
@@ -64,7 +108,7 @@
                   "",
                   "if (json.accessToken) {",
                   "    pm.collectionVariables.set('accessToken', json.accessToken);",
-                  "    console.log('dummy-bca-llm: saved accessToken for the Core Resources requests.');",
+                  "    console.log('dummy-abc-llm: saved accessToken for the Core Resources requests.');",
                   "}"
                 ]
               }
@@ -73,20 +117,43 @@
           "request": {
             "method": "POST",
             "header": [
-              { "key": "X-TIMESTAMP", "value": "{{oauthTimestamp}}" },
-              { "key": "X-CLIENT-KEY", "value": "{{clientId}}" },
-              { "key": "X-SIGNATURE", "value": "{{oauthSignature}}" },
-              { "key": "Content-Type", "value": "application/json" }
+              {
+                "key": "X-TIMESTAMP",
+                "value": "{{oauthTimestamp}}"
+              },
+              {
+                "key": "X-CLIENT-KEY",
+                "value": "{{clientId}}"
+              },
+              {
+                "key": "X-SIGNATURE",
+                "value": "{{oauthSignature}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
             ],
             "body": {
               "mode": "raw",
               "raw": "{\n  \"grantType\": \"client_credentials\"\n}",
-              "options": { "raw": { "language": "json" } }
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
             },
             "url": {
               "raw": "{{baseUrl}}/openapi/v1.0/access-token/b2b",
-              "host": ["{{baseUrl}}"],
-              "path": ["openapi", "v1.0", "access-token", "b2b"]
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "openapi",
+                "v1.0",
+                "access-token",
+                "b2b"
+              ]
             },
             "description": "OAuth2 client_credentials grant. Run this first — it stores the returned accessToken in a collection variable for the requests under \"Core Resources\"."
           },
@@ -113,7 +180,7 @@
                   "const clientSecret = pm.collectionVariables.get('clientSecret');",
                   "",
                   "if (!accessToken) {",
-                  "    console.warn('dummy-bca-llm: accessToken is empty — run \"Get Access Token\" first.');",
+                  "    console.warn('dummy-abc-llm: accessToken is empty — run \"Get Access Token\" first.');",
                   "}",
                   "",
                   "// Body must contain literal values, not {{variables}}: this script reads",
@@ -161,23 +228,55 @@
           "request": {
             "method": "POST",
             "header": [
-              { "key": "Authorization", "value": "Bearer {{accessToken}}" },
-              { "key": "X-TIMESTAMP", "value": "{{llmTimestamp}}" },
-              { "key": "X-SIGNATURE", "value": "{{llmSignature}}" },
-              { "key": "CHANNEL-ID", "value": "{{channelId}}" },
-              { "key": "X-PARTNER-ID", "value": "{{partnerId}}" },
-              { "key": "X-EXTERNAL-ID", "value": "{{externalId}}" },
-              { "key": "Content-Type", "value": "application/json" }
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              },
+              {
+                "key": "X-TIMESTAMP",
+                "value": "{{llmTimestamp}}"
+              },
+              {
+                "key": "X-SIGNATURE",
+                "value": "{{llmSignature}}"
+              },
+              {
+                "key": "CHANNEL-ID",
+                "value": "{{channelId}}"
+              },
+              {
+                "key": "X-PARTNER-ID",
+                "value": "{{partnerId}}"
+              },
+              {
+                "key": "X-EXTERNAL-ID",
+                "value": "{{externalId}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
             ],
             "body": {
               "mode": "raw",
               "raw": "{\n  \"clientId\": \"b66925de-d8ec-476e-a170-6cf06c863b78\",\n  \"sessionId\": \"session001\",\n  \"requestId\": \"request001\",\n  \"configs\": {\n    \"task\": \"vllm-text-generation\",\n    \"recommendation\": true\n  },\n  \"prompt\": \"buatkanlah cerita dongeng terbentuknya sebuah wilayah\"\n}",
-              "options": { "raw": { "language": "json" } }
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
             },
             "url": {
               "raw": "{{baseUrl}}/openapi/v1.0/llm-gateway/multimodal",
-              "host": ["{{baseUrl}}"],
-              "path": ["openapi", "v1.0", "llm-gateway", "multimodal"]
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "openapi",
+                "v1.0",
+                "llm-gateway",
+                "multimodal"
+              ]
             },
             "description": "Requires accessToken to be set (run \"Get Access Token\" first). Body values are literal (not {{variables}}) — see the pre-request script comment for why."
           },
@@ -218,7 +317,7 @@
                 "type": "text/javascript",
                 "exec": [
                   "const json = pm.response.json();",
-                  "console.log('dummy-bca-llm: simulated error ->', json.responseCode, json.responseMessage);",
+                  "console.log('dummy-abc-llm: simulated error ->', json.responseCode, json.responseMessage);",
                   "",
                   "pm.test('Returns the simulated error code', function () {",
                   "    pm.expect(json.responseCode).to.eql('403LM00');",
@@ -230,23 +329,55 @@
           "request": {
             "method": "POST",
             "header": [
-              { "key": "Authorization", "value": "Bearer {{accessToken}}" },
-              { "key": "X-TIMESTAMP", "value": "{{llmTimestamp}}" },
-              { "key": "X-SIGNATURE", "value": "{{llmSignature}}" },
-              { "key": "CHANNEL-ID", "value": "{{channelId}}" },
-              { "key": "X-PARTNER-ID", "value": "{{partnerId}}" },
-              { "key": "X-EXTERNAL-ID", "value": "{{externalId}}" },
-              { "key": "Content-Type", "value": "application/json" }
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              },
+              {
+                "key": "X-TIMESTAMP",
+                "value": "{{llmTimestamp}}"
+              },
+              {
+                "key": "X-SIGNATURE",
+                "value": "{{llmSignature}}"
+              },
+              {
+                "key": "CHANNEL-ID",
+                "value": "{{channelId}}"
+              },
+              {
+                "key": "X-PARTNER-ID",
+                "value": "{{partnerId}}"
+              },
+              {
+                "key": "X-EXTERNAL-ID",
+                "value": "{{externalId}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
             ],
             "body": {
               "mode": "raw",
               "raw": "{\n  \"clientId\": \"b66925de-d8ec-476e-a170-6cf06c863b78\",\n  \"prompt\": \"SIMULATE_ERROR:403LM00\"\n}",
-              "options": { "raw": { "language": "json" } }
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
             },
             "url": {
               "raw": "{{baseUrl}}/openapi/v1.0/llm-gateway/multimodal",
-              "host": ["{{baseUrl}}"],
-              "path": ["openapi", "v1.0", "llm-gateway", "multimodal"]
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "openapi",
+                "v1.0",
+                "llm-gateway",
+                "multimodal"
+              ]
             },
             "description": "Demonstrates the simulator-only SIMULATE_ERROR:<code> trigger (still requires a valid signature/token). Swap the code in the body to exercise any other documented error — see GET /docs."
           },
@@ -264,8 +395,12 @@
             "header": [],
             "url": {
               "raw": "{{baseUrl}}/docs",
-              "host": ["{{baseUrl}}"],
-              "path": ["docs"]
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "docs"
+              ]
             },
             "description": "Read-only Swagger/Postman-style reference page. Open the response's \"Preview\" tab to view it rendered."
           },
@@ -283,10 +418,16 @@
             "header": [],
             "url": {
               "raw": "{{baseUrl}}/dev/sign/oauth",
-              "host": ["{{baseUrl}}"],
-              "path": ["dev", "sign", "oauth"]
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "dev",
+                "sign",
+                "oauth"
+              ]
             },
-            "description": "Not part of the mirrored BCA API. Called automatically by \"Get Access Token\"'s pre-request script — no need to run this manually. Exposed here only for transparency/debugging."
+            "description": "Not part of the mirrored ABC API. Called automatically by \"Get Access Token\"'s pre-request script — no need to run this manually. Exposed here only for transparency/debugging."
           },
           "response": []
         }

@@ -7,7 +7,7 @@ const DOCS_HTML = `<!doctype html>
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>dummy-bca-llm &mdash; API Reference</title>
+<title>dummy-abc-llm &mdash; API Reference</title>
 <style>
   :root {
     --bg: #ffffff;
@@ -234,7 +234,7 @@ const DOCS_HTML = `<!doctype html>
 
 <nav class="sidebar" id="sidebar">
   <div class="brand">
-    <div class="brand-title">dummy-bca-llm</div>
+    <div class="brand-title">dummy-abc-llm</div>
     <div class="brand-sub">API Reference &middot; read-only</div>
   </div>
 
@@ -260,7 +260,7 @@ const DOCS_HTML = `<!doctype html>
 <main>
 
   <div class="banner">
-    &#9888;&#65039; This is a local <strong>simulator</strong>, not BCA's official API. Every successful
+    &#9888;&#65039; This is a local <strong>simulator</strong>, not ABC's official API. Every successful
     response below is picked from a small pool of static/randomized canned answers &mdash; no real
     LLM or bank system is ever called. Structure, headers, and signature rules mirror the source
     documentation 1:1 so client integrations can be built and tested against it.
@@ -269,7 +269,7 @@ const DOCS_HTML = `<!doctype html>
   <section id="overview">
     <h1>Overview</h1>
     <p class="lede">
-      Two endpoints are implemented, mirroring <em>BCA API &ndash; OAuth &amp; Signature OpenAPI v1.1</em>
+      Two endpoints are implemented, mirroring <em>ABC API &ndash; OAuth &amp; Signature OpenAPI v1.1</em>
       and <em>OpenAPI-LLM-Gateway-Multimodal API v1.2</em>.
     </p>
     <table>

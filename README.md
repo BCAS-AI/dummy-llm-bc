@@ -1,9 +1,9 @@
-# dummy-bca-llm
+# dummy-abc-llm
 
-A local simulator that mirrors, 1:1, the request/response contract of two BCA
+A local simulator that mirrors, 1:1, the request/response contract of two ABC
 OpenAPI documents:
 
-- `BCA API - OAuth & Signature OpenAPI v1.1` — access token issuance,
+- `ABC API - OAuth & Signature OpenAPI v1.1` — access token issuance,
   asymmetric (RSA) and symmetric (HMAC) signature validation.
 - `Technical Documentation OpenAPI-LLM-Gateway-Multimodal API v1.2` — the
   `/llm-gateway/multimodal` endpoint.
@@ -12,7 +12,7 @@ OpenAPI documents:
 pool of static, pre-written answers (randomized per request), and every
 header/signature/field validation rule from the docs is enforced for real, so
 you can develop and test a client integration end-to-end without touching
-BCA's actual sandbox.
+ABC's actual sandbox.
 
 ## Endpoints
 
@@ -27,12 +27,12 @@ BCA's actual sandbox.
 ```bash
 npm install
 npm start
-# -> dummy-bca-llm simulator listening on http://localhost:3000
+# -> dummy-abc-llm simulator listening on http://localhost:3000
 ```
 
 ## Seeded test client
 
-A single client, matching the worked examples published in the BCA docs
+A single client, matching the worked examples published in the ABC docs
 ("Signature Asymmetric How to" / "Signature Symmetric How to"), is seeded in
 [`src/config/clients.js`](src/config/clients.js):
 
@@ -69,7 +69,7 @@ npm run demo
 
 ## Postman collection
 
-[`postman/dummy-bca-llm.postman_collection.json`](postman/dummy-bca-llm.postman_collection.json)
+[`postman/dummy-abc-llm.postman_collection.json`](postman/dummy-abc-llm.postman_collection.json)
 imports as a normal collection — no separate environment file needed, everything
 (including the seeded client's credentials) is a collection variable. Import it,
 run **Authorization → Get Access Token** once, then anything under **Core
@@ -81,7 +81,7 @@ Resources** just works:
   primitive — so that request's pre-request script instead calls this
   simulator's own `GET /dev/sign/oauth` helper route (via `pm.sendRequest`) to
   get a freshly signed header pair. That route only exists because the seeded
-  keypair is the exact published sample from BCA's own docs, not a real
+  keypair is the exact published sample from ABC's own docs, not a real
   secret; never expose a real private key over HTTP like this.
 
 To point the collection at a deployed instance instead of localhost, edit the
@@ -173,7 +173,7 @@ Two things worth knowing:
 
 - `IP whitelist` / `Unauthorized. [Connection not allowed]` is defined in the
   error table but not enforced (no real network boundary in a local sim).
-- Symmetric-encryption (AES-256, used by some *other* BCA services like
+- Symmetric-encryption (AES-256, used by some *other* ABC services like
   OneKlik) is out of scope — not used by this endpoint.
 - The doc's 10MB request-size ceiling only holds locally; Vercel's own
   platform-level body limit (~4.5MB) applies first when deployed there.

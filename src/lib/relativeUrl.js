@@ -1,5 +1,5 @@
 // Implements the "Relative URL" canonicalization rules from the
-// BCA OpenAPI OAuth & Signature documentation (Signature Symmetric section):
+// ABC OpenAPI OAuth & Signature documentation (Signature Symmetric section):
 //  - path segments keep their slashes un-encoded
 //  - unreserved characters (A-Z a-z 0-9 - _ . ~) are left as-is
 //  - everything else (including comma) is percent-encoded, uppercase hex
@@ -8,19 +8,19 @@
 function encodeRfc3986(value) {
   return encodeURIComponent(value).replace(
     /[!'()*]/g,
-    (char) => `%${char.charCodeAt(0).toString(16).toUpperCase()}`
+    (char) => `%${char.charCodeAt(0).toString(16).toUpperCase()}`,
   );
 }
 
 function encodePath(pathname) {
   return pathname
-    .split('/')
+    .split("/")
     .map((segment) => encodeRfc3986(segment))
-    .join('/');
+    .join("/");
 }
 
 function canonicalizeRelativeUrl(rawPathAndQuery) {
-  const [pathPart, queryPart] = rawPathAndQuery.split('?');
+  const [pathPart, queryPart] = rawPathAndQuery.split("?");
   const path = encodePath(pathPart);
   if (!queryPart) return path;
 
@@ -36,7 +36,7 @@ function canonicalizeRelativeUrl(rawPathAndQuery) {
     return 0;
   });
 
-  const query = entries.map(([key, value]) => `${key}=${value}`).join('&');
+  const query = entries.map(([key, value]) => `${key}=${value}`).join("&");
   return `${path}?${query}`;
 }
 

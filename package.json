@@ -1,7 +1,7 @@
 {
-  "name": "dummy-bca-llm",
+  "name": "dummy-abc-llm",
   "version": "1.0.0",
-  "description": "Static-response simulator mirroring the BCA OpenAPI OAuth & Signature and LLM Gateway Multimodal API contracts (no real LLM is called; responses are canned/randomized).",
+  "description": "Static-response simulator mirroring the ABC OpenAPI OAuth & Signature and LLM Gateway Multimodal API contracts (no real LLM is called; responses are canned/randomized).",
   "main": "server.js",
   "private": true,
   "scripts": {

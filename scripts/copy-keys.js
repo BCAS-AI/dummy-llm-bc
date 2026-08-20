@@ -9,18 +9,23 @@
 // helper route, which lets the bundled Postman collection auto-generate
 // valid RSA signatures (Postman's sandbox has no RSA-signing primitive) —
 // this is safe only because this keypair is the exact published sample from
-// BCA's own OAuth & Signature documentation, not a real secret. Never apply
+// ABC's own OAuth & Signature documentation, not a real secret. Never apply
 // this "sign server-side, expose over HTTP" pattern to a real private key.
-const fs = require('fs');
-const path = require('path');
+const fs = require("fs");
+const path = require("path");
 
-const projectRoot = path.join(__dirname, '..');
-const destDir = path.join(projectRoot, 'dist', 'keys');
+const projectRoot = path.join(__dirname, "..");
+const destDir = path.join(projectRoot, "dist", "keys");
 fs.mkdirSync(destDir, { recursive: true });
 
-for (const fileName of ['test-client-public-key.pem', 'test-client-private-key.pem']) {
-  const sourceFile = path.join(projectRoot, 'keys', fileName);
+for (const fileName of [
+  "test-client-public-key.pem",
+  "test-client-private-key.pem",
+]) {
+  const sourceFile = path.join(projectRoot, "keys", fileName);
   const destFile = path.join(destDir, fileName);
   fs.copyFileSync(sourceFile, destFile);
-  console.log(`copy-keys: ${path.relative(projectRoot, sourceFile)} -> ${path.relative(projectRoot, destFile)}`);
+  console.log(
+    `copy-keys: ${path.relative(projectRoot, sourceFile)} -> ${path.relative(projectRoot, destFile)}`,
+  );
 }
