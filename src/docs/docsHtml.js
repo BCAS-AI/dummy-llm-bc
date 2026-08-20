@@ -280,8 +280,7 @@ const DOCS_HTML = `<!doctype html>
       </tbody>
     </table>
     <div class="note">
-      Local base URL: <code class="inline">http://localhost:3000</code>. On Vercel, the deployment
-      domain replaces it &mdash; the paths above are unchanged.
+      Base URL: <code class="inline">https://dummy-llm-bc.vercel.app</code>
     </div>
   </section>
 
@@ -314,7 +313,7 @@ const DOCS_HTML = `<!doctype html>
 
     <h3>Sample request</h3>
     <div class="code-block">
-      <pre id="oauth-req-sample"><code>curl -X POST http://localhost:3000/openapi/v1.0/access-token/b2b \\
+      <pre id="oauth-req-sample"><code>curl -X POST https://dummy-llm-bc.vercel.app/openapi/v1.0/access-token/b2b \\
   -H "X-TIMESTAMP: 2024-03-19T11:46:16+07:00" \\
   -H "X-CLIENT-KEY: b66925de-d8ec-476e-a170-6cf06c863b78" \\
   -H "X-SIGNATURE: &lt;base64 RSA signature&gt;" \\
@@ -403,7 +402,7 @@ X-SIGNATURE  = Base64( HMAC-SHA512(ClientSecret, StringToSign) )</code></pre>
 
     <h3>Sample request</h3>
     <div class="code-block">
-      <pre id="llm-req-sample"><code>curl -X POST http://localhost:3000/openapi/v1.0/llm-gateway/multimodal \\
+      <pre id="llm-req-sample"><code>curl -X POST https://dummy-llm-bc.vercel.app/openapi/v1.0/llm-gateway/multimodal \\
   -H "Authorization: Bearer &lt;accessToken&gt;" \\
   -H "X-TIMESTAMP: 2024-03-19T11:46:16+07:00" \\
   -H "X-SIGNATURE: &lt;base64 HMAC signature&gt;" \\
