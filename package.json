@@ -1,0 +1,21 @@
+{
+  "name": "dummy-bca-llm",
+  "version": "1.0.0",
+  "description": "Static-response simulator mirroring the BCA OpenAPI OAuth & Signature and LLM Gateway Multimodal API contracts (no real LLM is called; responses are canned/randomized).",
+  "main": "server.js",
+  "private": true,
+  "scripts": {
+    "postinstall": "node scripts/copy-keys.js",
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js",
+    "demo": "node test/e2e.js"
+  },
+  "engines": {
+    "node": "18.x"
+  },
+  "dependencies": {
+    "axios": "^1.7.7",
+    "express": "^4.19.2"
+  },
+  "license": "UNLICENSED"
+}
